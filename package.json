@@ -1,0 +1,19 @@
+{
+  "name": "bilaleiga",
+  "version": "1.0.0",
+  "description": "test bilaleiga front to back",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-watch index.js --presets env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016https://github.com/steindors13/bilaleiga.git"
+  },
+  "author": "Steindor Ingi Snorrason",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
