@@ -1,9 +1,33 @@
-import express from 'express';
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const items = require('./routes/api/items');
 
 const app = express();
 
-app.get('/', (req, res, next) => {
-    res.json({message: 'Hello world'});
-});
+// Bodyparser Middleware
+app.use(bodyParser.json());
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+// Db config
+const db = require('./config/keys').mongoURI;
+
+// Connect to Mongo
+mongoose
+    .connect(db)
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
+
+// Use Routes
+app.use('/api/items', items);
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
+
+
+
+
+
+
+
