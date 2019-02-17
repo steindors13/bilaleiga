@@ -1,54 +1,39 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import uuid from 'uuid';
+import { connect } from 'react-redux';
+import { getItems, deleteItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 class ListOfCars extends Component {
-    state = {
-        cars: [
-            {id: uuid(), name: 'Toyota', number: 'LM 789' },
-            {id: uuid(), name: 'Skoda', number: 'KH 839' },
-            {id: uuid(), name: 'Isuzu', number: 'BN 431' },
-            {id: uuid(), name: 'Mazda', number: 'CB 322' }
-        ]
+
+    componentDidMount() {
+        this.props.getItems();
     }
 
+    onDeleteClick = (id) => {
+        this.props.deleteItem(id);
+    }
     render() {
-        const { cars } = this.state;
+        const { cars } = this.props.car;
         return(
             <Container>
-                <Button
-                    color="dark"
-                    style={{marginBottom: '2rem'}}
-                    onClick={ () => {
-                        const name = prompt('Enter Car');
-                        if(name) {
-                            this.setState(state => ({
-                                cars: [...state.cars, { id: uuid(), name}]
-                            }));
-                        }
-                    }}
-                >Add Car
-                </Button>
 
                 <ListGroup>
                     <TransitionGroup>
-                        {cars.map(({ id, name }) => (
+                        {cars.map(({ id, name, number }) => (
                           <CSSTransition key={id} timeout={500} classNames="fade">
                             <ListGroupItem>
                             <Button 
                                 className="remove-btn"
                                 color="danger"
                                 size="sm"
-                                onClick={() => {
-                                    this.setState(state => ({
-                                        cars: state.cars.filter(car => car.id !== id)
-                                    }));
-                                }}
+                                onClick={this.onDeleteClick.bind(this, id)}
                             >
                               &times;                                
                             </Button>
-                            {name}</ListGroupItem>
+                            {name}{"  "}{number}
+                            </ListGroupItem>
                           </CSSTransition>  
                         ))}
                     </TransitionGroup>
@@ -58,4 +43,13 @@ class ListOfCars extends Component {
     }
 }
 
-export default ListOfCars;
+ListOfCars.propTypes = {
+    getItems: PropTypes.func.isRequired,
+    car: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    car: state.car
+});
+
+export default connect(mapStateToProps, { getItems, deleteItem })(ListOfCars);
