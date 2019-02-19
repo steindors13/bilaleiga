@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
@@ -10,12 +10,14 @@ export default function(state = initialState, action) {
     switch(action.type) {
         case GET_ITEMS:
             return {
-                ...state
+                ...state,
+                cars: action.payload,
+                loading: false
             };
         case DELETE_ITEM:
             return {
                 ...state,
-                cars: state.cars.filter(car => car.id !== action.payload)
+                cars: state.cars.filter(car => car._id !== action.payload)
             };
         case ADD_ITEM:
             return {

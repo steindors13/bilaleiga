@@ -21,14 +21,14 @@ class ListOfCars extends Component {
 
                 <ListGroup>
                     <TransitionGroup>
-                        {cars.map(({ id, name, number }) => (
-                          <CSSTransition key={id} timeout={500} classNames="fade">
+                        {cars.map(({ _id, name, number }) => (
+                          <CSSTransition key={_id} timeout={500} classNames="fade">
                             <ListGroupItem>
                             <Button 
                                 className="remove-btn"
                                 color="danger"
                                 size="sm"
-                                onClick={this.onDeleteClick.bind(this, id)}
+                                onClick={this.onDeleteClick.bind(this, _id)}
                             >
                               &times;                                
                             </Button>
