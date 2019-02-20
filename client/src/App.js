@@ -3,10 +3,12 @@ import AppNavbar from './components/AppNavbar';
 import ListOfCars from './components/ListOfCars';
 import ItemModal from './components/itemModal';
 import { Container } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+
 import { Provider } from 'react-redux';
 import store from './store';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -15,8 +17,8 @@ class App extends Component {
         <div className="App">
           <AppNavbar />
           <Container>
-          <ItemModal/>
-          <ListOfCars />
+            <ItemModal/>
+            <ListOfCars />
           </Container>
         </div>
       </Provider>

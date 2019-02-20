@@ -9,8 +9,7 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "server": "nodemon index.js",
-    "start": "babel-watch index.js --presets env",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
@@ -22,18 +21,10 @@
   "author": "Steindor Ingi Snorrason",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "babel-upgrade": "0.0.24",
-    "babel-watch": "^7.0.0",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.10",
     "nodemon": "^1.18.9"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.3.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
   }
 }
